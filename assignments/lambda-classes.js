@@ -22,14 +22,19 @@ class Instructor extends Person {
     demo(subject) {
         return `Today we are learning about ${subject}`
     };
-    grade(student, subject) {
-        return `${student} recieves a perfect score on ${subject}`
+    graded(student, subject) {
+        return `${student.name} recieves a perfect score on ${subject}`
     };
+
     arbitraryGrading(){
-        let positive = Math.floor(Math.random() * Math.floor(-100, 100));
+        let positive = Math.floor(Math.random(10) * 100) - 50;
         if (positive == 0) return this.arbitraryGrading();
         return positive;
     };
+
+    changeGrade(student){
+        return student.grade = student.grade + this.arbitraryGrading();
+    }
 }
 
 class Student extends Instructor {
@@ -137,7 +142,7 @@ console.log(abba.prAssignment('math'));
 console.log(babba.sprintChallenge('science'));
 
 console.log(fred.demo('underwater basket weaving'));
-console.log(fred.grade(abba.name, 'dancing'));
+console.log(fred.graded(abba, 'dancing'));
 
 console.log(bill.standup('#web22_chat'));
 console.log(bill.debugsCode(babba.name, 'C#'));
@@ -145,6 +150,7 @@ console.log(bill.debugsCode(babba.name, 'C#'));
 /* Stretch */
 
 console.log(babba.graduate());
-console.log(abba.graduate());
 
-console.log(fred.arbitraryGrading())
+
+console.log(fred.changeGrade(abba));
+console.log(abba.graduate());
